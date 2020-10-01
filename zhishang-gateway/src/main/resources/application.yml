@@ -1,0 +1,50 @@
+spring:
+  zipkin:
+    enabled: false
+  application:
+    name: gateway
+  cloud:
+    #限流设置
+    sentinel:
+      #心跳启动
+      eager: true
+      transport:
+        #sentinel控制台访问路径
+        dashboard: http://47.115.52.157:8081
+        port: 8081
+    #geteway配置
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+      - id: user
+        uri: lb://user
+        predicates:
+        - Path=/user/**
+        filters:
+          name: Retry
+          args:
+            retries: 3
+            status: 503
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+yuegod:
+  security:
+    antMatchers:
+      premissAll: '/**'
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌秘钥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime: 30

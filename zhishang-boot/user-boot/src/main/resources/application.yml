@@ -1,0 +1,47 @@
+spring:
+  redis:
+    host: 106.53.114.190
+    password: sango_mima
+    port: 6379
+    database: 1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://cdb-8ttdd12j.gz.tencentcdb.com:10070/qq_shop?serverTimezone=Asia/Shanghai
+    username: root
+    password: quziwei123
+  zipkin:
+    enabled: false
+  application:
+    name: user
+server:
+  port: 0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+yuegod:
+  security:
+    antMatchers:
+      premissAll: '/**'
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌秘钥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime: 30
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 20000
+        readTimeout: 20000
+  httpclient:
+    connection-timeout: 20000
+    connection-timer-repeat: 20000
+    enabled: true
+    max-connections: 200
+    max-connections-per-route: 50

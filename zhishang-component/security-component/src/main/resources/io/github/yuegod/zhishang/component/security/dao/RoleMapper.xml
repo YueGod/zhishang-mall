@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.yuegod.zhishang.component.security.dao.RoleMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="io.github.yuegod.zhishang.component.security.entity.SysRole">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="findRolesByUserId" resultType="io.github.yuegod.zhishang.component.security.entity.SysRole">
+        select t_role.id,t_role.name from t_role where id in (select role_id from t_user_role where user_id = #{userId})
+    </select>
+
+    <insert id="saveRolesByUserIdAndRoleIds">
+        insert into t_user_role(user_id,role_id) values
+        <foreach collection="roleIds" item="roleId" separator="," close=";">
+            (#{userId},#{roleId})
+        </foreach>
+    </insert>
+
+    <delete id="deleteRolesByUserIdAndRoleIds">
+        delete from t_user_role where user_id = #{userId} and role_id in
+        <foreach collection="roleIds" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

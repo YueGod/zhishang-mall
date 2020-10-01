@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.yuegod</groupId>
+    <artifactId>zhishang-shop</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+    <modules>
+        <module>zhishang-gateway</module>
+        <module>zhishang-api</module>
+        <module>zhishang-service</module>
+        <module>zhishang-web</module>
+        <module>zhishang-mq</module>
+        <module>zhishang-component</module>
+        <module>zhishang-basecode</module>
+        <module>zhishang-feign</module>
+        <module>zhishang-boot</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.9.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <fastjson.version>1.2.72</fastjson.version>
+        <swagger-doc-spring-boot-starter.version>2.9.2</swagger-doc-spring-boot-starter.version>
+        <mysql-connector.version>8.0.21</mysql-connector.version>
+        <alibaba-druid.version>1.1.22</alibaba-druid.version>
+        <velocity-engine.version>2.2</velocity-engine.version>
+        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+        <project.version>1.0-SNAPSHOT</project.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
+        <jjwt.version>0.9.0</jjwt.version>
+        <hutool.version>5.3.10</hutool.version>
+        <jedis.version>3.3.0</jedis.version>
+        <commons-pool2.version>2.4.2</commons-pool2.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

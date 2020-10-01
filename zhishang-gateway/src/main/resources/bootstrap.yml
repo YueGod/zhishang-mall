@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: http://47.115.52.157:8848
+      discovery:
+        server-addr: http://47.115.52.157:8848
+        metadata:
+          heart-beat-interval: 3    # 心跳包发送周期,单位为秒
+          heart-beat-timeout: 6     # 心跳超时时间,即服务端6秒收不到心跳,会将客户端注册的实例设为不健康
+          ip-delete-timeout: 9      # 实例删除的超时时间,即服务端9秒收不到客户端心跳,会将客户端注册的实例删除
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+    org.springframework.http.server.reactive: debug
+    org.springframework.web.reactive: debug
+    reactor.ipc.netty: debug
