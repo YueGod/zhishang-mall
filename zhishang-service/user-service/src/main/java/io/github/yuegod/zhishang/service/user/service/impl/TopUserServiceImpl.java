@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -43,6 +44,7 @@ public class TopUserServiceImpl extends BaseServiceImpl<TopUser, User, Integer, 
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void register(User user) {
         SysUser sysUser = new SysUser();
         sysUser.setUsername(user.getUsername());

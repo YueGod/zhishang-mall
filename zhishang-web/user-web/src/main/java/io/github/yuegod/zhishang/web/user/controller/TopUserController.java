@@ -22,7 +22,7 @@ public class TopUserController {
 
     @PostMapping
     @ApiOperation("用户注册")
-    public void register(User user) {
+    public void register(@RequestBody User user) {
         topUserService.register(user);
     }
 
