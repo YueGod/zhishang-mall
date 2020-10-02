@@ -58,7 +58,7 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.addFilterAfter(systemSecurityFilter, FilterSecurityInterceptor.class);
         // 初始化不拦截的请求
-        String[] permissAllArray = new String[]{"/*", "/static/**", "/webjars/**", "/swagger**", "/swagger-resources/**", "/v2/io.github.yuegod.zhishang.basecode.api-docs"};
+        String[] permissAllArray = new String[]{"/feign/**", "/*", "/static/**", "/webjars/**", "/swagger**", "/swagger-resources/**", "/v2/io.github.yuegod.zhishang.basecode.api-docs"};
         if (!StringUtils.isEmpty(permissAll)) {
             List<String> permissList = new ArrayList<>(Arrays.asList(permissAllArray));
             permissList.addAll(Arrays.asList(permissAll.split(",")));
