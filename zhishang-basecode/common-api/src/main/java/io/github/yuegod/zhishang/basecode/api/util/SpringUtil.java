@@ -1,4 +1,4 @@
-package io.github.yuegod.zhishang.basecode.web.util;
+package io.github.yuegod.zhishang.basecode.api.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

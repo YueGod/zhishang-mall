@@ -7,9 +7,12 @@ import feign.Response;
 import feign.Util;
 import feign.codec.DecodeException;
 import feign.codec.Decoder;
+import io.github.yuegod.zhishang.basecode.api.component.FeignBeanComponent;
+import io.github.yuegod.zhishang.basecode.api.util.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
@@ -20,8 +23,12 @@ import java.lang.reflect.Type;
  **/
 @Slf4j
 public class FeignResultDecoder implements Decoder {
+
+
     @Override
     public Object decode(Response response, Type type) throws IOException, DecodeException, FeignException {
+        FeignBeanComponent feignBeanComponent = (FeignBeanComponent) SpringUtil.getBean("feignBeanComponent");
+        log.info("缓存到的类：{}", feignBeanComponent.feignBeanCache);
         if (response.body() == null) {
             throw new DecodeException(response.status(), "没有返回有效的数据", response.request());
         }
@@ -36,13 +43,9 @@ public class FeignResultDecoder implements Decoder {
         }
         jb.getJSONObject("data").remove("create");
         Class clazz = null;
-        try {
-            clazz = Class.forName(type.getTypeName());
-        } catch (ClassNotFoundException e) {
-            log.info("无法找到该类：{}", type.getTypeName());
-        }
+        clazz = feignBeanComponent.feignBeanCache.get(type.getTypeName());
         log.info("处理后的数据:{}", jb.getJSONObject("data").toJavaObject(clazz));
-        return jb.getObject("data",clazz);
+        return jb.getObject("data", clazz);
     }
 
 }

@@ -28,6 +28,7 @@
     </parent>
 
     <properties>
+        <reflections.version>0.9.11</reflections.version>
         <fastjson.version>1.2.72</fastjson.version>
         <swagger-doc-spring-boot-starter.version>2.9.2</swagger-doc-spring-boot-starter.version>
         <mysql-connector.version>8.0.21</mysql-connector.version>
