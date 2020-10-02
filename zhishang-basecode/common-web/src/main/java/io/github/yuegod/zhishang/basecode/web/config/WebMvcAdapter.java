@@ -11,7 +11,9 @@ import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.servlet.mvc.method.annotation.RequestAttributeMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import javax.servlet.http.HttpServletResponse;
@@ -73,6 +75,7 @@ public class WebMvcAdapter implements WebMvcRegistrations {
                 super.handleReturnValue(result, returnType, mavContainer, webRequest);
             }
         };
+
     }
 
     /**

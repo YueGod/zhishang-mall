@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>user-boot</module>
+        <module>order-boot</module>
     </modules>
 
     <dependencies>
@@ -21,4 +22,18 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <target>${java.version}</target>
+                    <source>${java.version}</source>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

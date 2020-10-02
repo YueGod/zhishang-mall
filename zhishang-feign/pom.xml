@@ -18,8 +18,9 @@
     <dependencies>
         <!--feign依赖-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>io.github.yuegod</groupId>
+            <artifactId>feign-component</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>user-web</module>
+        <module>order-web</module>
     </modules>
 
     <dependencies>

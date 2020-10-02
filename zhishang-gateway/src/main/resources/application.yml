@@ -10,7 +10,7 @@ spring:
       eager: true
       transport:
         #sentinel控制台访问路径
-        dashboard: http://47.115.52.157:8081
+        dashboard: http://localhost:12345
         port: 8081
     #geteway配置
     gateway:

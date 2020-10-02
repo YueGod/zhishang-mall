@@ -1,5 +1,6 @@
 package io.github.yuegod.zhishang.api.user.domain.model;
 
+import io.github.yuegod.zhishang.basecode.api.annotation.FeignBean;
 import io.github.yuegod.zhishang.basecode.api.base.BaseModel;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @description
  **/
 @Data
+@FeignBean
 public class User extends BaseModel<Integer> {
     /**
      * 昵称

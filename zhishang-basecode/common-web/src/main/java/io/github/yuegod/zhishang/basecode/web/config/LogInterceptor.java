@@ -32,12 +32,12 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setCharacterEncoding("utf-8");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setCharacterEncoding("utf-8");
     }
 
     public void logInfo(HttpServletRequest request, HttpServletResponse response, Object o) {
