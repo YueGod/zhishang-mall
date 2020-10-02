@@ -1,4 +1,5 @@
-package io.github.yuegod.zhishang.basecode.api.component;
+package io.github.yuegod.zhishang.component.feign.component;
+
 
 import io.github.yuegod.zhishang.basecode.api.annotation.FeignBean;
 import org.reflections.Reflections;
