@@ -25,4 +25,9 @@ public interface ITopUserService<E> extends IBaseService<User,Integer,E> {
      */
     void verificationCode(Integer type);
 
+    /**
+     * 通过UserId查询用户信息
+     */
+    User findByUserId(Integer userId);
+
 }

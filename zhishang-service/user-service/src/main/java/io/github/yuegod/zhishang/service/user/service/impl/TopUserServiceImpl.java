@@ -1,9 +1,9 @@
 package io.github.yuegod.zhishang.service.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.github.yuegod.api.security.enums.StatusEnum;
+import io.github.yuegod.zhishang.api.user.constant.UserRedisConstants;
 import io.github.yuegod.zhishang.api.user.domain.model.User;
 import io.github.yuegod.zhishang.api.user.service.ITopUserService;
 import io.github.yuegod.zhishang.basecode.api.base.BaseException;
@@ -17,12 +17,15 @@ import io.github.yuegod.zhishang.service.user.dao.TopUserMapper;
 import io.github.yuegod.zhishang.service.user.domain.entity.TopUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * @author quziwei
@@ -42,6 +45,8 @@ public class TopUserServiceImpl extends BaseServiceImpl<TopUser, User, Integer, 
     private UserRoleMapper userRoleMapper;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private StringRedisTemplate reedisTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -58,12 +63,16 @@ public class TopUserServiceImpl extends BaseServiceImpl<TopUser, User, Integer, 
         wrapper.setEntity(sysRole);
         sysRole = roleMapper.selectOne(wrapper);
         userRoleMapper.add(sysUser.getId(), sysRole.getId());
-        mapper.insert(model2Entity(user));
+        TopUser topUser = model2Entity(user);
+        mapper.insert(topUser);
+        reedisTemplate.opsForHash().put(UserRedisConstants.USER_INFO, String.valueOf(topUser.getUserId()), topUser);
     }
 
+
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void change(User user) {
-        if (isNotEmpty(user.getPassword())){
+        if (isNotEmpty(user.getPassword())) {
             throw new BaseException("不允许修改密码");
         }
         mapper.updateById(model2Entity(user));
@@ -72,6 +81,18 @@ public class TopUserServiceImpl extends BaseServiceImpl<TopUser, User, Integer, 
     @Override
     public void verificationCode(Integer type) {
 
+    }
+
+    @Override
+    public User findByUserId(Integer userId) {
+        Optional<Object> optional = Optional.ofNullable(reedisTemplate.opsForHash().get(UserRedisConstants.USER_INFO, String.valueOf(userId)));
+        TopUser topUser = null;
+        if (optional.isPresent()) {
+            topUser = (TopUser) optional.get();
+            return entity2Model(topUser);
+        }
+        topUser = mapper.findByUserId(userId);
+        return entity2Model(topUser);
     }
 
     @Override
@@ -126,5 +147,13 @@ public class TopUserServiceImpl extends BaseServiceImpl<TopUser, User, Integer, 
         } else {
             return update(user);
         }
+    }
+
+    public void saveRedis(String key, Object field, User value) {
+        reedisTemplate.opsForHash().put(key, field, value);
+    }
+
+    public User findByRedis(String key, Object field) {
+        return (User) reedisTemplate.opsForHash().get(key, field);
     }
 }

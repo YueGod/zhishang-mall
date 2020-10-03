@@ -18,5 +18,4 @@ public interface IUserFeignService {
     @GetMapping("/feign/user/{id}")
     User findById(@PathVariable Integer id);
 
-
 }

@@ -1,14 +1,14 @@
 package io.github.yuegod.zhishang.basecode.api.base;
 
 
-
 import java.io.Serializable;
 import java.util.Objects;
 
 
-public abstract class BaseModel<ID>implements Serializable {
+public abstract class BaseModel<ID> implements Serializable {
     private static final long serialVersionUID = 1L;
     private ID id;
+    private boolean create;
 
     public boolean isCreate() {
         return null == id ? true : false;
