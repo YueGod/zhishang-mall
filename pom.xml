@@ -45,7 +45,7 @@
         <hutool.version>5.3.10</hutool.version>
         <jedis.version>3.3.0</jedis.version>
         <commons-pool2.version>2.4.2</commons-pool2.version>
-        <rocket-mq.version>4.3.1</rocket-mq.version>
+        <rocket-mq.version>2.1.0</rocket-mq.version>
     </properties>
 
     <dependencies>
