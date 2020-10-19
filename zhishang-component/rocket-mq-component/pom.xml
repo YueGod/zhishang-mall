@@ -3,19 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zhishang-shop</artifactId>
+        <artifactId>zhishang-component</artifactId>
         <groupId>io.github.yuegod</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zhishang-component</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>mp-component</module>
-        <module>security-component</module>
-        <module>feign-component</module>
-        <module>rocket-mq-component</module>
-    </modules>
+    <artifactId>rocket-mq-component</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>${rocket-mq.version}</version>
+        </dependency>
+    </dependencies>
 </project>
